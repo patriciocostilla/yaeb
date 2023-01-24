@@ -1,0 +1,6 @@
+{
+    "watch": ["src", "swaggerDefinition.json", ".env"],
+    "ext": ".ts,.js,.json",
+    "ignore": ["swagger.json"],
+    "exec": "npm run swagger && ts-node -r tsconfig-paths/register ./src/index.ts"
+}
