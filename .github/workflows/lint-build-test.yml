@@ -5,6 +5,7 @@ jobs:
   Lint-Build-Test:
     runs-on: ubuntu-22.04
     steps:
+      - run: npm install
       - run: npm run lint
       - run: npm run build
       - run: npm run test
