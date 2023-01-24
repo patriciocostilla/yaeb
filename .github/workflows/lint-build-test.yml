@@ -1,0 +1,10 @@
+name: Lint, build and test the app
+run-name: ${{ github.actor }}
+on: [push]
+jobs:
+  Lint-Build-Test:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run test
