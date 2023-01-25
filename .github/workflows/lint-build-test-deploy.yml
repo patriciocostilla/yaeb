@@ -1,0 +1,27 @@
+name: Lint, build, test and deploy the app
+run-name: ${{ github.actor }}
+on: [push]
+jobs:
+  lint_build_test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run test
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: docker/login-action@v2
+        with: 
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
+      - uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/yaeb:dev
