@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import os from 'os';
 
 /**
  *  @openapi
@@ -7,6 +8,9 @@ import { NextFunction, Request, Response } from 'express';
  *      description: API Index
  */
 class IndexController {
+
+  private hostname = os.hostname();
+
   /**
   * @openapi
   * /ping:
@@ -23,7 +27,7 @@ class IndexController {
   */
   public ping = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      res.status(200).json('pong');
+      res.status(200).json({ hostname: this.hostname });
     } catch (error) {
       next(error);
     }
