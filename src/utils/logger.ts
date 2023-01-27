@@ -3,6 +3,7 @@ import path from 'path';
 import winston from 'winston';
 import WinstonDaily from 'winston-daily-rotate-file';
 import SlackHook, { SlackMessage } from 'winston-slack-webhook-transport';
+import LokiTransport from 'winston-loki';
 
 import config from '@configs/config';
 
@@ -47,6 +48,16 @@ if (config.LOGGER_SLACK_WEBHOOK_URL.length && !config.isTest) {
     level: config.LOGGER_SLACK_LOG_LEVEL,
   });
   transports.push(slackTransport);
+}
+
+if (config.LOGGER_LOKI_URL && !config.isTest) {
+  const lokiTransport = new LokiTransport({
+    host: config.LOGGER_LOKI_URL,
+    basicAuth: `${config.LOGGER_LOKI_USERNAME}:${config.LOGGER_LOKI_PASSWORD}`,
+    json: true,
+    format: winston.format.json(),
+  });
+  transports.push(lokiTransport);
 }
 
 const logger = winston.createLogger({
