@@ -27,7 +27,12 @@ class IndexController {
   */
   public ping = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      res.status(200).json({ hostname: this.hostname, date: new Date().getTime() });
+      const response = { 
+        server: this.hostname, 
+        date: new Date().getTime(),
+        host: req.headers.host,
+      };
+      res.status(200).json(response);
     } catch (error) {
       next(error);
     }
