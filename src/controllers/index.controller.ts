@@ -31,6 +31,7 @@ class IndexController {
         server: this.hostname, 
         date: new Date().getTime(),
         host: req.headers.host,
+        query: req.query,
       };
       res.status(200).json(response);
     } catch (error) {
