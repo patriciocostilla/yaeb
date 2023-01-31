@@ -1,3 +1,4 @@
+import { logger } from '@/utils/logger';
 import { NextFunction, Request, Response } from 'express';
 import os from 'os';
 
@@ -38,6 +39,12 @@ class IndexController {
     } catch (error) {
       next(error);
     }
+  };
+
+  // eslint-disable-next-line
+  public breakMe = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    logger.error('App about to die');
+    throw (new Error('This sure breaks'));
   };
 
   /**

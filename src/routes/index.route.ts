@@ -17,6 +17,7 @@ class IndexRoute implements Route {
 
   private initializeRoutes() {
     this.router.get('/ping', this.controller.ping);
+    this.router.get('/breakme', this.controller.breakMe);
     this.router.post('/validate', 
       body('int').isInt(), 
       body('string').isString(), 
