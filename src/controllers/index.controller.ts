@@ -44,6 +44,7 @@ class IndexController {
   // eslint-disable-next-line
   public breakMe = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     logger.error('App about to die');
+    res.end();
     throw (new Error('This sure breaks'));
   };
 
