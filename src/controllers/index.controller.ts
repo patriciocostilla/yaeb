@@ -32,7 +32,7 @@ class IndexController {
         server: this.hostname, 
         date: new Date().getTime(),
         host: req.headers.host,
-        //query: req.query,
+        query: req.query,
         path: req.path,
       };
       res.status(200).json(response);
