@@ -31,8 +31,9 @@ class IndexController {
       const response = { 
         server: this.hostname, 
         date: new Date().getTime(),
+        dateStr: new Date().toString(),
         host: req.headers.host,
-        query: req.query,
+        //query: req.query,
         path: req.path,
       };
       res.status(200).json(response);
