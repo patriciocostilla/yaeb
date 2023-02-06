@@ -1,6 +1,10 @@
 name: Lint, build, test and deploy the app
 run-name: ${{ github.actor }}
-on: [push]
+on: 
+  push:
+    branches:
+      - main
+      - dev
 jobs:
   lint_build_test:
     runs-on: ubuntu-22.04
@@ -22,7 +26,13 @@ jobs:
         with: 
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
-      - uses: docker/build-push-action@v3
+      - if: github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/yaeb:latest
+      - if: github.ref != 'refs/heads/main'
+        uses: docker/build-push-action@v3
         with:
           push: true
           tags: ${{ secrets.DOCKER_USER }}/yaeb:dev
