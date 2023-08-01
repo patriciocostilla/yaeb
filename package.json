@@ -44,7 +44,7 @@
     "swagger-ui-express": "^4.6.0",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1",
-    "winston-loki": "^6.0.6",
+    "winston-loki": "^6.0.7",
     "winston-slack-webhook-transport": "^2.2.2"
   },
   "devDependencies": {
