@@ -1,4 +1,4 @@
-FROM node:18.12.1
+FROM node:18.17.0
 
 USER node:node
 
